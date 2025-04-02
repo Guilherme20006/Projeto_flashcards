@@ -112,48 +112,24 @@ function CarregarCartasDoLocalStorage() {
 CarregarCartasDoLocalStorage()
 MostrarOuOcultarCartas()
 
-let BotaoAdicionarAtivo = false
+
 
 function CriarCarta() {
-    
-    if (BotaoAdicionarAtivo == false) {
-        Adicionar.insertAdjacentHTML('beforeend',`<input type='text' id='titulo' placeholder='Insira um titulo'></input>
-            <input type='text' id='conteudo' placeholder='Insira a descrição'></input>`) 
-            
-        let CampoConteudoCard = document.querySelector('#conteudo')
-            
-            
-            
-        CampoConteudoCard.addEventListener('keypress', function(event) {
-                
-            if (event.key === 'Enter') {
-                    
-                let TituloCard = document.querySelector('#titulo')
-                let ConteudoCard =document.querySelector('#conteudo')
-                    
-                CarregarCartas(TituloCard.value,ConteudoCard.value);
+    let titulo = prompt('Insira o titulo da carta:');
+    let descricao = prompt('Insira o descrição da carta:');
         
-                let cartasAtuais = document.querySelectorAll(".cartao")
-                    
-                contador = cartasAtuais.length-1
+    let TituloCard = titulo;
+    let ConteudoCard = descricao;
         
-                AdicionaAoDicionario(TituloCard.value, ConteudoCard.value);
-                AdicionaNoLocalStorage("carta",JSON.stringify(DicionarioCartas));
-                    
-                TituloCard.value = " "
-                ConteudoCard.value = " "
-            }
-        })
-        BotaoAdicionarAtivo = true
-    } else {
-        const inputTitulo = document.querySelector('#titulo')
-        const inputDescricao = document.querySelector('#conteudo')
-        inputTitulo.remove()
-        inputDescricao.remove()
-        BotaoAdicionarAtivo = false
-    }
-    
-    
+    CarregarCartas(TituloCard,ConteudoCard);
+
+    let cartasAtuais = document.querySelectorAll(".cartao")
+        
+    contador = cartasAtuais.length-1
+
+    AdicionaAoDicionario(TituloCard, ConteudoCard);
+    AdicionaNoLocalStorage("carta",JSON.stringify(DicionarioCartas));
+    MostrarOuOcultarCartas();
 }
 
 function LimparLocalStorage() {
